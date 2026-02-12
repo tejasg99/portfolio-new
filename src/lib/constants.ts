@@ -10,7 +10,7 @@ export const SECTIONS = [
 export const PERSONAL_INFO = {
     name: "Tejas Gawade",
     title: "Full Stack Developer",
-    tagline: "Building digital experiences that matter",
+    tagline: "Crafting seamless digital experiences from frontend to backend",
     email: "tgawade092@gmail.com",
     github: "https://github.com/tejasg99",
     linkedin: "https://www.linkedin.com/in/tejas-gawade-97t",
@@ -20,12 +20,22 @@ export const PERSONAL_INFO = {
 export const SKILLS = [
     { name: "Next.js", category: "Frontend" },
     { name: "React", category: "Frontend" },
-    { name: "TypeScript", category: "Language" },
-    { name: "React Native", category: "Mobile" },
+    { name: "TailwindCSS", category: "Styling"},
     { name: "Node.js", category: "Backend" },
+    { name: "Express", category: "Framework"},
     { name: "MongoDB", category: "Database" },
-    { name: "PostgreSQL", category: "Database" },
-    { name: "Expo", category: "Mobile" },
+    { name: "PostgreSQL", category: "Database" },    
+    { name: "TypeScript", category: "Language" },
+    { name: "Javascript", category: "Language" },
+    { name: "Python", category: "Language" },
+    { name: "C++", category: "Language" },
+    { name: "SQL", category: "Language"},
+    { name: "Git", category: "Version Control"},
+    { name: "Vite", category: "Build Tool"},
+    { name: "React Native", category: "Mobile" },
+    { name: "Expo", category: "Mobile Framework" },
+    { name: "Visual Studio Code", category: "IDE" },
+    { name: "Android Studio", category: "IDE" },
 ];
 
 export const PROJECTS = [
@@ -38,6 +48,7 @@ export const PROJECTS = [
         image: "/projects/project-1.jpg",
         link: "#",
         github: "#",
+        featured: true,
     },
     {
         id: 2,
@@ -48,6 +59,7 @@ export const PROJECTS = [
         image: "/projects/project-2.jpg",
         link: "#",
         github: "#",
+        featured: true,
     },
     {
         id: 3,
@@ -58,6 +70,7 @@ export const PROJECTS = [
         image: "/projects/project-3.jpg",
         link: "#",
         github: "#",
+        featured: true,
     },
 ];
 
@@ -67,7 +80,12 @@ export const EXPERIENCE = [
         title: "Web Development Intern",
         company: "Jabsz Studios",
         period: "August 1 2025 - December 15 2025",
-        description: "Developed mobile applications using React Native and Expo.",
+        description: "Developed and maintained mobile applications using React Native and Expo. Collaborated with the team to implement new features and optimize app performance. Gained hands-on experience with TypeScript and Android Studio for testing and debugging.",
         technologies: ["React Native", "Expo", "TypeScript", "Android Studio"],
+        highlights: [
+            "Built and shipped production-ready mobile features",
+            "Improved app performance by optimizing component rendering",
+            "Collaborated with team mates to implement pixel-perfect UI",
+        ],
     },
 ];
