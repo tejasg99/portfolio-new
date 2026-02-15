@@ -1,37 +1,56 @@
+"use client";
+
 import * as React from "react";
+import { motion, HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useReducedMotion } from "@/hooks/use-reduced-motion";
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
-    variant?: "default" | "glass" | "glow" | "gradient-border" | "spotlight";
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: "default" | "glass" | "glow" | "gradient-border" | "spotlight";
+  hover?: boolean;
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, variant = "default", hover = true, children, ...props }, ref) => {
+    const reducedMotion = useReducedMotion();
+
+    const variants = {
+      default:
+        "rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] relative overflow-hidden",
+      glass: "rounded-2xl glass relative overflow-hidden",
+      glow: "rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] relative overflow-hidden hover:border-[var(--color-primary)]/30 hover:shadow-[0_0_40px_-10px_rgba(110,123,255,0.3)]",
+      "gradient-border": "rounded-2xl gradient-border relative overflow-hidden",
+      spotlight:
+        "rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] relative overflow-hidden corner-glow card-reflection",
+    };
+
+    const baseClassName = cn(
+      variants[variant],
+      "transition-all duration-500",
+      className
+    );
+
+    if (reducedMotion || !hover) {
+      return (
+        <div ref={ref} className={baseClassName} {...props}>
+          {children}
+        </div>
+      );
+    }
+
+    return (
+      <motion.div
+        ref={ref}
+        className={baseClassName}
+        whileHover={{ y: -5, scale: 1.01 }}
+        transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        {...(props as any)}
+      >
+        {children}
+      </motion.div>
+    );
   }
->(({ className, variant = "default", ...props }, ref) => {
-  const variants = {
-    default:
-      "rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] relative overflow-hidden",
-    glass:
-      "rounded-2xl glass relative overflow-hidden",
-    glow:
-      "rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] relative overflow-hidden hover:border-[var(--color-primary)]/30 hover:shadow-[0_0_40px_-10px_rgba(110,123,255,0.3)]",
-    "gradient-border":
-      "rounded-2xl gradient-border relative overflow-hidden",
-    spotlight:
-      "rounded-2xl border border-[var(--color-card-border)] bg-[var(--color-card)] relative overflow-hidden corner-glow card-reflection",
-  };
-
-  return (
-    <div
-      ref={ref}
-      className={cn(
-        variants[variant],
-        "transition-all duration-500",
-        className
-      )}
-      {...props}
-    />
-  );
-});
+);
 Card.displayName = "Card";
 
 const CardHeader = React.forwardRef<
