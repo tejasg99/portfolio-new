@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { SectionWrapper } from "@/components/ui/section-wrapper";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { PROJECTS } from "@/lib/constants";
@@ -12,6 +12,7 @@ import { GlowEffect } from "@/components/ui/glow-effect";
 import { MotionWrapper } from "@/components/motion/motion-wrapper";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
 import { ExternalLink, Github } from "lucide-react";
+import Image from "next/image";
 
 export function Projects() {
     const reducedMotion = useReducedMotion();
@@ -57,6 +58,7 @@ interface ProjectCardProps {
 
 function ProjectCard({ project, index, reducedMotion }: ProjectCardProps) {
     const cardRef = useRef<HTMLDivElement>(null);
+    const [isHovered, setIsHovered] = useState(false);
 
     const { scrollYProgress } = useScroll({
         target: cardRef,
@@ -100,6 +102,8 @@ function ProjectCard({ project, index, reducedMotion }: ProjectCardProps) {
                 ease: [0.16, 1, 0.3, 1],
                 delay: index * 0.15,
             }}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             <Card variant="glow" hover={false} className="group relative overflow-hidden">
                 {/* Cursor glow effect */}
@@ -117,29 +121,38 @@ function ProjectCard({ project, index, reducedMotion }: ProjectCardProps) {
                 <div className="relative grid gap-6 p-6 md:grid-cols-2 md:gap-8 md:p-8 lg:p-10">
                     {/* Image Container */}
                     <motion.div
-                        className={`relative aspect-video overflow-hidden rounded-xl bg-background-secondary ${index % 2 === 1 ? "md:order-2" : ""
+                        className={`relative aspect-video overflow-clip rounded-xl bg-background-secondary ${index % 2 === 1 ? "md:order-2" : ""
                             }`}
                         style={!reducedMotion ? { y: imageY, scale: imageScale } : {}}
                     >
-                        {/* Gradient placeholder */}
-                        <motion.div
-                            className="absolute inset-0 bg-linear-to-br from-primary/10 via-purple/10 to-primary-dark/10"
-                            animate={
-                                !reducedMotion
-                                    ? {
-                                        background: [
-                                            "linear-gradient(135deg, rgba(110,123,255,0.1) 0%, rgba(90,62,255,0.1) 50%, rgba(63,77,158,0.1) 100%)",
-                                            "linear-gradient(135deg, rgba(90,62,255,0.1) 0%, rgba(63,77,158,0.1) 50%, rgba(110,123,255,0.1) 100%)",
-                                            "linear-gradient(135deg, rgba(110,123,255,0.1) 0%, rgba(90,62,255,0.1) 50%, rgba(63,77,158,0.1) 100%)",
-                                        ],
+                        {project.image ? (
+                            <Image
+                                fill={true}
+                                src={project.image}
+                                alt="Project Image"
+                            />
+                        ) : (
+                            <>
+                                <motion.div
+                                    className="absolute inset-0 bg-linear-to-br from-primary/10 via-purple/10 to-primary-dark/10"
+                                    animate={
+                                        !reducedMotion
+                                            ? {
+                                                background: [
+                                                    "linear-gradient(135deg, rgba(110,123,255,0.1) 0%, rgba(90,62,255,0.1) 50%, rgba(63,77,158,0.1) 100%)",
+                                                    "linear-gradient(135deg, rgba(90,62,255,0.1) 0%, rgba(63,77,158,0.1) 50%, rgba(110,123,255,0.1) 100%)",
+                                                    "linear-gradient(135deg, rgba(110,123,255,0.1) 0%, rgba(90,62,255,0.1) 50%, rgba(63,77,158,0.1) 100%)",
+                                                ],
+                                            }
+                                            : {}
                                     }
-                                    : {}
-                            }
-                            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                        />
+                                    transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                />
+                                {/* Grid pattern */}
+                                <div className="absolute inset-0 bg-[linear-gradient(rgba(110,123,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(110,123,255,0.05)_1px,transparent_1px)] bg-size-[20px_20px]" />
+                            </>
 
-                        {/* Grid pattern */}
-                        <div className="absolute inset-0 bg-[linear-gradient(rgba(110,123,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(110,123,255,0.05)_1px,transparent_1px)] bg-size-[20px_20px]" />
+                        )}
 
                         {/* Project number */}
                         <motion.div
@@ -152,51 +165,39 @@ function ProjectCard({ project, index, reducedMotion }: ProjectCardProps) {
                             0{project.id}
                         </motion.div>
 
-                        {/* Hover overlay */}
+                        {/* Hover overlay project preview */}
                         <motion.div
-                            className="absolute inset-0 flex items-center justify-center bg-background/90 backdrop-blur-sm"
+                            className="absolute inset-0 flex rounded-2xl items-center justify-center bg-background/90 backdrop-blur-sm"
                             initial={{ opacity: 0 }}
-                            whileHover={{ opacity: 1 }}
+                            animate={{ opacity: isHovered ? 1 : 0 }}
                             transition={{ duration: 0.3 }}
                         >
                             <motion.div
                                 className="flex gap-4"
                                 initial={{ opacity: 0, y: 20 }}
-                                whileHover={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.3, delay: 0.1 }}
+                                animate={{
+                                    opacity: isHovered ? 1 : 0,
+                                    y: isHovered ? 0 : 20
+                                }}
+                                transition={{ duration: 0.3, delay: isHovered ? 0.1 : 0 }}
                             >
-                                <Button variant="default" size="sm" asChild>
-                                    <a href={project.link} target="_blank" rel="noopener noreferrer">
-                                        <ExternalLink className="mr-2 h-4 w-4" />
-                                        Live Demo
-                                    </a>
-                                </Button>
-                                <Button variant="outline" size="sm" asChild>
-                                    <a href={project.github} target="_blank" rel="noopener noreferrer">
-                                        <Github className="mr-2 h-4 w-4" />
-                                        Code
-                                    </a>
-                                </Button>
+                                <motion.span
+                                    initial={{ opacity: 0 }}
+                                    whileInView={{ opacity: 1 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: 0.5 }}
+                                    className="text-foreground-muted"
+                                >
+                                    Click on Live demo button to visit the website
+                                </motion.span>
                             </motion.div>
                         </motion.div>
-
-                        {/* Placeholder text */}
-                        <div className="flex h-full w-full items-center justify-center text-foreground-tertiary transition-transform duration-700 group-hover:scale-110">
-                            <motion.span
-                                initial={{ opacity: 0 }}
-                                whileInView={{ opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.5 }}
-                            >
-                                Project Preview
-                            </motion.span>
-                        </div>
 
                         {/* Shimmer effect on hover */}
                         <motion.div
                             className="absolute inset-0 -translate-x-full bg-linear-to-r from-transparent via-white/5 to-transparent"
                             initial={{ x: "-100%" }}
-                            whileHover={{ x: "100%" }}
+                            animate={{ x: isHovered ? "100%" : "-100%" }}
                             transition={{ duration: 0.6, ease: "easeInOut" }}
                         />
                     </motion.div>
@@ -250,6 +251,25 @@ function ProjectCard({ project, index, reducedMotion }: ProjectCardProps) {
                                     <Badge variant="primary">{tag}</Badge>
                                 </motion.div>
                             ))}
+                        </motion.div>
+
+                        {/* Desktop Links - Always visible below content */}
+                        <motion.div
+                            variants={itemVariants}
+                            className="hidden gap-4 pt-2 md:flex"
+                        >
+                            <Button variant="default" size="sm" asChild>
+                                <a href={project.link} target="_blank" rel="noopener noreferrer">
+                                    <ExternalLink className="mr-2 h-4 w-4" />
+                                    Live Demo
+                                </a>
+                            </Button>
+                            <Button variant="ghost" size="sm" asChild>
+                                <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                    <Github className="mr-2 h-4 w-4" />
+                                    Source Code
+                                </a>
+                            </Button>
                         </motion.div>
 
                         {/* Mobile Links */}

@@ -6,9 +6,10 @@ import { SectionHeading } from "@/components/ui/section-heading";
 import { SKILLS } from "@/lib/constants";
 import { Card } from "@/components/ui/card";
 import { SkillIcon } from "@/components/ui/skill-icon";
-import { GlowEffect } from "@/components/ui/glow-effect";
 import { MotionWrapper } from "@/components/motion/motion-wrapper";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
+import { getSkillConfig } from "@/lib/skill-data";
+import { useRef, useState } from "react";
 
 export function Skills() {
     const reducedMotion = useReducedMotion();
@@ -62,48 +63,9 @@ export function Skills() {
                 whileInView="visible"
                 viewport={{ once: true, amount: 0.2 }}
             >
-                {SKILLS.map((skill, index) => (
+                {SKILLS.map((skill) => (
                     <motion.div key={skill.name} variants={itemVariants}>
-                        <Card
-                            variant="glow"
-                            hover={false}
-                            className="group relative cursor-default p-6"
-                        >
-                            {/* Cursor-following glow */}
-                            <GlowEffect color="primary" />
-
-                            {/* Blue gradient reflection on top */}
-                            <motion.div
-                                className="pointer-events-none absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-primary/5 to-transparent"
-                                initial={{ opacity: 0 }}
-                                whileHover={{ opacity: 1 }}
-                                transition={{ duration: 0.3 }}
-                            />
-
-                            <motion.div
-                                className="relative flex items-center gap-4"
-                                whileHover={!reducedMotion ? { x: 5 } : {}}
-                                transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                            >
-                                <SkillIcon name={skill.name} category={skill.category} />
-                                <div>
-                                    <h3 className="font-semibold text-foreground transition-colors group-hover:text-accent">
-                                        {skill.name}
-                                    </h3>
-                                    <p className="text-sm text-foreground-secondary">
-                                        {skill.category}
-                                    </p>
-                                </div>
-                            </motion.div>
-
-                            {/* Corner accent glow */}
-                            <motion.div
-                                className="pointer-events-none absolute -bottom-2 -right-2 h-20 w-20 rounded-tl-3xl bg-linear-to-tl from-primary/10 to-transparent"
-                                initial={{ opacity: 0 }}
-                                whileHover={{ opacity: 1 }}
-                                transition={{ duration: 0.3 }}
-                            />
-                        </Card>
+                        <SkillCard skill={skill} reducedMotion={reducedMotion} />
                     </motion.div>
                 ))}
             </motion.div>
@@ -123,5 +85,99 @@ export function Skills() {
                 </motion.div>
             </MotionWrapper>
         </SectionWrapper>
+    );
+}
+
+interface SkillCardProps {
+    skill: { name: string; category: string };
+    reducedMotion: boolean;
+}
+
+function SkillCard({ skill, reducedMotion }: SkillCardProps) {
+    const [isHovered, setIsHovered] = useState(false);
+    const cardRef = useRef<HTMLDivElement>(null);
+    const config = getSkillConfig(skill.name);
+
+    return (
+        <motion.div
+            ref={cardRef}
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
+            whileHover={!reducedMotion ? { y: -5 } : {}}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+        >
+            <Card
+                variant="glow"
+                hover={false}
+                className="group relative cursor-default overflow-hidden p-6"
+                style={{
+                    borderColor: isHovered ? `${config.color}30` : undefined,
+                    boxShadow: isHovered ? `0 0 40px -10px ${config.glowColor}` : undefined,
+                }}
+            >
+                {/* Cursor-following glow with brand color */}
+                <motion.div
+                    className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-500"
+                    style={{
+                        background: `radial-gradient(circle at 50% 50%, ${config.glowColor} 0%, transparent 70%)`,
+                    }}
+                    animate={{ opacity: isHovered ? 0.15 : 0 }}
+                />
+
+                {/* Top gradient reflection with brand color */}
+                <motion.div
+                    className="pointer-events-none absolute inset-x-0 top-0 h-1/2"
+                    style={{
+                        background: `linear-gradient(to bottom, ${config.bgColor}, transparent)`,
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                />
+
+                <motion.div
+                    className="relative flex items-center gap-4"
+                    animate={!reducedMotion && isHovered ? { x: 5 } : { x: 0 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 25 }}
+                >
+                    <SkillIcon name={skill.name} category={skill.category} showGlow={isHovered} />
+                    <div>
+                        <motion.h3
+                            className="font-semibold transition-colors duration-300"
+                            style={{
+                                color: isHovered ? config.color : "var(--color-foreground)",
+                            }}
+                        >
+                            {skill.name}
+                        </motion.h3>
+                        <p className="text-sm text-foreground-secondary">
+                            {skill.category}
+                        </p>
+                    </div>
+                </motion.div>
+
+                {/* Corner accent glow with brand color */}
+                <motion.div
+                    className="pointer-events-none absolute -bottom-2 -right-2 h-20 w-20 rounded-tl-3xl"
+                    style={{
+                        background: `linear-gradient(to top left, ${config.bgColor}, transparent)`,
+                    }}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.3 }}
+                />
+
+                {/* Bottom border accent */}
+                <motion.div
+                    className="absolute bottom-0 left-0 h-px w-full"
+                    style={{
+                        background: `linear-gradient(to right, transparent, ${config.color}50, transparent)`,
+                    }}
+                    initial={{ scaleX: 0 }}
+                    animate={{ scaleX: isHovered ? 1 : 0 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                />
+            </Card>
+        </motion.div>
     );
 }
