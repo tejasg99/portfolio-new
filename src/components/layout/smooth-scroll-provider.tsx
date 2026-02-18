@@ -22,11 +22,11 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
         // Lenis instance
         lenisRef.current = new Lenis({
-            duration: 1.2,
+            duration: 1.5,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             orientation: "vertical",
             smoothWheel: true,
-            touchMultiplier: 2,
+            overscroll: false,
         })
         
         // raf loop
