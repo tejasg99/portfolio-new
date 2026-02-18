@@ -15,6 +15,7 @@ export const PERSONAL_INFO = {
     github: "https://github.com/tejasg99",
     linkedin: "https://www.linkedin.com/in/tejas-gawade-97t",
     location: "Pune, Maharashtra, India",
+    resumeUrl: "https://drive.google.com/file/d/1LJQjdUJs877LvYRdp64WqB8MyIiZm2Kj/view?usp=sharing",
 };
 
 export const SKILLS = [
@@ -35,6 +36,8 @@ export const SKILLS = [
     { name: "Expo", category: "Mobile Framework" },
     { name: "Visual Studio Code", category: "IDE" },
     { name: "Android Studio", category: "IDE" },
+    { name: "Prisma", category: "ORM" },
+    { name: "Mongoose", category: "ODM" },
 ];
 
 export const PROJECTS = [

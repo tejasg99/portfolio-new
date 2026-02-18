@@ -37,15 +37,6 @@ export function Projects() {
                     />
                 ))}
             </div>
-
-            {/* View more */}
-            <MotionWrapper delay={0.3}>
-                <div className="mt-12 flex justify-center">
-                    <Button variant="outline" size="lg">
-                        View All Projects
-                    </Button>
-                </div>
-            </MotionWrapper>
         </SectionWrapper>
     );
 }

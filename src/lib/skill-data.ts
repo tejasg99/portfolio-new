@@ -67,9 +67,9 @@ export const SKILL_CONFIGS: Record<string, SkillConfig> = {
     "Expo": {
         name: "Expo",
         category: "Mobile",
-        color: "#000020",
-        bgColor: "rgba(255, 255, 255, 0.1)",
-        glowColor: "rgba(255, 255, 255, 0.3)",
+        color: "#747482",
+        bgColor: "rgba(172, 172, 176, 0.1)",
+        glowColor: "rgba(172, 172, 176, 0.3)",
     },
     "Tailwind CSS": {
         name: "Tailwind CSS",
@@ -106,6 +106,13 @@ export const SKILL_CONFIGS: Record<string, SkillConfig> = {
         bgColor: "rgba(45, 55, 72, 0.2)",
         glowColor: "rgba(45, 55, 72, 0.4)",
     },
+    "Mongoose": {
+        name: "Mongoose",
+        category: "ODM",
+        color: "#880000",
+        bgColor: "rgba(136, 0, 0, 0.1)",
+        glowColor: "rgba(136, 0, 0, 0.4)",
+    },
     "Android Studio": {
         name: "Android Studio",
         category: "Tools",
@@ -116,9 +123,9 @@ export const SKILL_CONFIGS: Record<string, SkillConfig> = {
     "Express": {
         name: "Express",
         category: "Backend",
-        color: "#000000",
-        bgColor: "rgba(255, 255, 255, 0.1)",
-        glowColor: "rgba(255, 255, 255, 0.3)",
+        color: "#C4C4C4",
+        bgColor: "rgba(196, 196, 196, 0.1)",
+        glowColor: "rgba(196, 196, 196, 0.5)",
     },
     "C++": {
         name: "C++",

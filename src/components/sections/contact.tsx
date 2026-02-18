@@ -220,7 +220,7 @@ export function Contact() {
                         </MagneticWrapper>
                         <MagneticWrapper strength={0.1}>
                             <Button variant="ghost" size="lg" asChild>
-                                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer">
+                                <a href={PERSONAL_INFO.resumeUrl} target="_blank" rel="noopener noreferrer">
                                     <FileText className="mr-2 h-5 w-5" />
                                     Resume
                                 </a>

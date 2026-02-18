@@ -18,6 +18,7 @@ import {
     SiExpress,
     SiVite,
     SiCplusplus,
+    SiMongoose,
 } from "react-icons/si";
 import { VscVscode } from "react-icons/vsc";
 import { Code2 } from "lucide-react";
@@ -42,6 +43,7 @@ const iconMap: Record<string, React.ComponentType<{ className?: string; style?: 
     Python: SiPython,
     Vercel: SiVercel,
     Prisma: SiPrisma,
+    Mongoose: SiMongoose,
     "Android Studio": SiAndroidstudio,
     Express: SiExpress,
     Vite: SiVite,
