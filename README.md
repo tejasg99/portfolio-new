@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio - Full Stack Developer
 
-## Getting Started
+A modern, animated portfolio website built with Next.js 16, featuring a futuristic dark theme with smooth animations and premium UI/UX.
 
-First, run the development server:
+## ✨ Features
+
+- **Modern Tech Stack**: Next.js 16 (App Router), TypeScript, Tailwind CSS v4
+- **Smooth Animations**: Framer Motion for scroll-triggered reveals, micro-interactions, and parallax effects, Lenis for smooth scroll
+- **Premium Dark Theme**: Futuristic design with electric blue-purple accents and neon green highlights
+- **Responsive Design**: Mobile-first approach with fluid layouts
+- **Accessibility**: Reduced motion support, semantic HTML, keyboard navigation
+- **Performance**: Optimized for Core Web Vitals with smooth 60fps animations
+
+## 🎨 Design Features
+
+- Vertical radial spotlight gradients
+- Glassmorphism cards with subtle reflections
+- Magnetic button interactions
+- Brand-colored skill icons with dynamic glows
+- Animated timeline with scroll-based reveals
+- Particle effects and floating elements
+
+## 🛠️ Tech Stack
+
+| Category | Technologies |
+|---|---|
+| Framework | Next.js 16 (App Router) |
+| Language | TypeScript (strict) |
+| Styling | Tailwind CSS v4, CSS Variables |
+| Animations | Framer Motion |
+| Smooth Scroll | Lenis |
+| Icons | Lucide React, react-icons |
+| UI Components | shadcn/ui (customized) |
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js 18+ 
+- npm or pnpm
+
+### Installation
 
 ```bash
+# Clone the repository
+git clone https://github.com/tejasg99/portfolio-new.git
+
+# Navigate to the project
+cd portfolio
+
+# Install dependencies
+npm install
+
+# Start the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open http://localhost:3000 to view the site.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build for Production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+# Create production build
+npm run build
 
-## Learn More
+# Start production server
+npm start
+```
+ 
+## 📁 Project Structure
+```
+src/
+├── app/
+│   ├── layout.tsx          # Root layout with providers
+│   ├── page.tsx            # Main page with all sections
+│   ├── globals.css         # Global styles & CSS variables
+│   └── icon.png            # favicon
+├── components/
+│   ├── layout/             # Navbar, smooth scroll provider
+│   ├── motion/             # Reusable animation components
+│   ├── sections/           # Page sections (Hero, About, etc.)
+│   └── ui/                 # UI components (Button, Card, etc.)
+├── hooks/                  # Custom React hooks
+├── lib/                    # Utilities, constants, configs
+└── types/                  # TypeScript type definitions
+```
 
-To learn more about Next.js, take a look at the following resources:
+## 🎯 Sections
+- Hero - Full-viewport intro with animated spotlight and CTA
+- About - Personal introduction with stats and quick facts
+- Skills - Technology grid with brand-colored icons
+- Projects - Featured work with hover interactions
+- Experience - Animated timeline of work history
+- Contact - Call-to-action with social links
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## ⚙️ Customization
+### Personal Information
+Edit src/lib/constants.ts to update:
+- Name, title, tagline
+- Contact information
+- Skills list
+- Projects
+- Work experience
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Theme Colors
+Modify CSS variables in src/app/globals.css:
+- Primary colors (blue-purple)
+- Accent color (neon green)
+- Background shades
+- Text colors
 
-## Deploy on Vercel
+### Adding Skills
+- Add skill config in src/lib/skill-data.ts
+- Import icon from react-icons
+- Add to SKILLS array in src/lib/constants.ts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ♿ Accessibility
+- Respects prefers-reduced-motion
+- Semantic HTML structure
+- Keyboard navigation support
+- Focus states on interactive elements
+- Color contrast compliance

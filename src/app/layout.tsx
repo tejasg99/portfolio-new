@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/layout/smooth-scroll-provider";
@@ -10,10 +10,28 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+export const viewport: Viewport = {
+  themeColor: "#05070F",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+};
+
 export const metadata: Metadata = {
   title: "Tejas Gawade | Full Stack Developer",
-  description: "Full Stack Developer specializing in Next.js, React, TypeScript, and modern web technologies.",
-  keywords: ["Full Stack Developer", "React", "React Native", "Next.js", "TypeScript", "Portfolio"],
+  description: "Full Stack Developer specializing in Next.js, React, Node.js, TypeScript, and modern web technologies.",
+  keywords: [
+    "Full Stack Developer",
+    "React Developer",
+    "Next.js Developer",
+    "TypeScript",
+    "Web Developer",
+    "Frontend Developer",
+    "Backend Developer",
+    "Portfolio",
+    "React Native",
+    "Node.js",
+  ],
   authors: [{ name: "Tejas Gawade" }],
   openGraph: {
     title: "Tejas Gawade | Full Stack Developer",

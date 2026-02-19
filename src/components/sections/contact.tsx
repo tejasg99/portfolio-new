@@ -6,7 +6,8 @@ import { PERSONAL_INFO } from "@/lib/constants";
 import { Button } from "@/components/ui/button";
 import { MagneticWrapper } from "@/components/motion/magnetic-wrapper";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { Mail, Github, Linkedin, FileText, ArrowUpRight } from "lucide-react";
+import { Mail, FileText, ArrowUpRight } from "lucide-react";
+import { FiGithub as Github, FiLinkedin as Linkedin } from "react-icons/fi";
 
 export function Contact() {
     const currentYear = new Date().getFullYear();

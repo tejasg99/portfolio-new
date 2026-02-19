@@ -11,7 +11,8 @@ import { Button } from "@/components/ui/button";
 import { GlowEffect } from "@/components/ui/glow-effect";
 import { MotionWrapper } from "@/components/motion/motion-wrapper";
 import { useReducedMotion } from "@/hooks/use-reduced-motion";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink } from "lucide-react";
+import { FiGithub as Github} from "react-icons/fi";
 import Image from "next/image";
 
 export function Projects() {
