@@ -59,25 +59,6 @@ export function Contact() {
 
     return (
         <SectionWrapper id="contact" className="relative overflow-hidden">
-            {/* Background spotlight */}
-            <motion.div
-                className="pointer-events-none absolute left-1/2 top-0 h-150 w-200 -translate-x-1/2 -translate-y-1/2"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            >
-                <div
-                    className="h-full w-full"
-                    style={{
-                        background: `
-              radial-gradient(ellipse 50% 50% at 50% 50%, rgba(110, 123, 255, 0.2) 0%, transparent 60%),
-              radial-gradient(ellipse 70% 60% at 50% 50%, rgba(90, 62, 255, 0.1) 0%, transparent 50%)
-            `,
-                    }}
-                />
-            </motion.div>
-
             {/* Animated particles */}
             {!reducedMotion && (
                 <>

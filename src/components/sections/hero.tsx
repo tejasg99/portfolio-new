@@ -91,102 +91,6 @@ export function Hero() {
                     contain: "paint layout",
                 }}
             >
-                {/* Primary spotlight */}
-                <div
-                    className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/4"
-                    style={{
-                        width: "clamp(600px, 100vw, 1200px)",
-                        height: "clamp(400px, 80vh, 800px)",
-                    }}
-                >
-                    <motion.div
-                        className="h-full w-full"
-                        style={{
-                            willChange: shouldAnimateMouse ? "transform" : "auto",
-                            background: `
-                                radial-gradient(ellipse 60% 50% at 50% 0%, rgba(110, 123, 255, 0.35) 0%, transparent 60%),
-                                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(78, 95, 209, 0.25) 0%, transparent 50%),
-                                radial-gradient(ellipse 100% 70% at 50% 0%, rgba(63, 77, 158, 0.15) 0%, transparent 40%)
-                            `,
-                        }}
-                        animate={
-                            shouldAnimateMouse
-                                ? {
-                                    x: mousePosition.normalizedX * 20,
-                                    y: mousePosition.normalizedY * 10,
-                                }
-                                : { x: 0, y: 0 }
-                        }
-                        transition={{
-                            type: "spring",
-                            stiffness: 50,
-                            damping: 30,
-                        }}
-                    />
-                </div>
-
-                {/*  Secondary purple hint */}
-                <div
-                    className="absolute left-1/4 top-1/4"
-                    style={{
-                        width: "clamp(200px, 30vw, 400px)",
-                        height: "clamp(200px, 30vw, 400px)",
-                    }}
-                >
-                    <motion.div
-                        className="h-full w-full rounded-full opacity-20 blur-3xl"
-                        style={{
-                            willChange: shouldAnimateMouse ? "transform" : "auto",
-                            background:
-                                "radial-gradient(circle, rgba(90, 62, 255, 0.4) 0%, transparent 70%)",
-                        }}
-                        animate={
-                            shouldAnimateMouse
-                                ? {
-                                    x: mousePosition.normalizedX * -30,
-                                    y: mousePosition.normalizedY * -30,
-                                }
-                                : { x: 0, y: 0 }
-                        }
-                        transition={{
-                            type: "spring",
-                            stiffness: 30,
-                            damping: 30,
-                        }}
-                    />
-                </div>
-
-                {/* Tertiary glow */}
-                <div
-                    className="absolute right-1/4 top-1/3"
-                    style={{
-                        width: "clamp(150px, 25vw, 300px)",
-                        height: "clamp(150px, 25vw, 300px)",
-                    }}
-                >
-                    <motion.div
-                        className="h-full w-full rounded-full opacity-15 blur-3xl"
-                        style={{
-                            willChange: shouldAnimateMouse ? "transform" : "auto",
-                            background:
-                                "radial-gradient(circle, rgba(110, 123, 255, 0.5) 0%, transparent 70%)",
-                        }}
-                        animate={
-                            shouldAnimateMouse
-                                ? {
-                                    x: mousePosition.normalizedX * 40,
-                                    y: mousePosition.normalizedY * 40,
-                                }
-                                : { x: 0, y: 0 }
-                        }
-                        transition={{
-                            type: "spring",
-                            stiffness: 30,
-                            damping: 30,
-                        }}
-                    />
-                </div>
-
                 {/* Animated orbs */}
                 <motion.div
                     className="absolute left-[10%] top-[20%] h-2 w-2 rounded-full bg-primary"
@@ -235,7 +139,7 @@ export function Hero() {
             </div>
 
             {/* ========== GRID PATTERN ========== */}
-            <div className="pointer-events-none absolute inset-0 -z-10 bg-[linear-gradient(rgba(110,123,255,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(110,123,255,0.03)_1px,transparent_1px)] bg-size-[72px_72px] mask-[radial-gradient(ellipse_at_center,black_20%,transparent_70%)]" />
+            <div className="absolute bottom-0 left-0 right-0 top-0 bg-[linear-gradient(to_right,#4f4f4f2e_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
 
             {/* ========== MAIN CONTENT ========== */}
             <motion.div
